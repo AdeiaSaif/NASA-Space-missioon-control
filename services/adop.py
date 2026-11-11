@@ -8,7 +8,6 @@ import config
 
 console = Console()
 
-
 def show_image(api_url):
     response = requests.get(api_url,timeout=config.TIMEOUT)
     img_response = requests.get(response.json()[0]["hdurl"])
@@ -19,5 +18,6 @@ def show_image(api_url):
 def show_details(api_url,date="",img=False):
     response=requests.get(api_url,params={"api_key":config.NASA_API_KEY,"date":date},timeout=config.TIMEOUT)
     response_json= response.json()[0]
-    print(f'Title: {response_json["title"]}\nDate: {response_json["date"]}\nPermalink: {response_json["permalink"]}')
+    print("="*90)
+    print(f'Title: {response_json["title"]}\nDate: {response_json["date"]}\nImage Link: {response_json["hdurl"]}\n Permalink: {response_json["permalink"]}')
     return f'{show_image(api_url) if img else ""}'
